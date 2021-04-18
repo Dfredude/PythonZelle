@@ -1,0 +1,22 @@
+from graphics import *
+def main():
+    win = GraphWin('Sample', 720, 720)
+    win.setCoords(0,0,10,10)
+    shape = Rectangle(Point(4,4),Point(6,6))
+    shape.setOutline("red")
+    shape.setFill("red")
+    shape.draw(win)
+    for i in range(10):
+        new = shape.clone()
+        p = win.getMouse()
+        c = shape.getCenter()
+        dx = p.getX() - c.getX()
+        dy = p.getY() - c.getY()
+        new.move(dx,dy)
+        new.draw(win)
+    bye = Text(Point(5,8),'Goodbye')
+    bye.setSize(36)
+    bye.draw(win)
+    win.getMouse()
+    win.close()
+main()
