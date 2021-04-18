@@ -1,7 +1,0 @@
-6
-Fred 100
-Caleb 89
-Carl 53
-Angel 35
-John 50
-Wenzel 95
