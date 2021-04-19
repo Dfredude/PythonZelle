@@ -1,5 +1,3 @@
-#This program with graphically plot a regression line
-
 from graphics import *
 import math as m
 
@@ -27,7 +25,7 @@ def button(text, button_text_X_point, button_text_Y_point, graphicwindow, X_dif,
     else: return click
 
 def main():
-    win = GraphWin('Regression line plot', 720, 720)
+    win = GraphWin('Regression line plot', 720, 480)
     win.setCoords(0, 0, 10, 10)
     points_list, x_list, y_list, xy_list = [], [], [], []
     done = False
@@ -35,6 +33,7 @@ def main():
         done = button('Done', 1, 1, win, .5, .5)
         if done == True: break
         point = done
+        point.draw(win)
         points_list.append(point)
         print(done)
     for i in points_list:
@@ -49,8 +48,14 @@ def main():
     y_average = sum(y_list)/n
     x_sq_list = squareEach(x_list)
     x_sq_mean = sum(x_sq_list)/n
-    xy_sum = sum(xy_list)
-    m = (xy_sum - n * x_average * y_average) / (x_average**2 - n * x_sq_mean)
+    xy_mean = sum(xy_list)/n
+    m = (x_average * y_average - xy_mean) / (x_average**2 - x_sq_mean)
     print(m)
+    y_start = y_average - m * x_average
+    y_finish = y_start + m*10
+    first_point = Point(0, y_start)
+    second_point = Point(10, y_finish)
+    Line(first_point, second_point).draw(win)
+    win.getMouse()
 
 main()
