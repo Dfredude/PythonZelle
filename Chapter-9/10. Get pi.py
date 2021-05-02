@@ -1,43 +1,51 @@
 from graphics import *
+import random as r
+def drawWindow():
+    win = GraphWin('Get pi using Monte Carlo simulation', 720, 480)
+    win.setCoords(-1,-1,1,1)
+    return win
 
-def main():
-    win = GraphWin('Archery Target', 720, 720)
-    win.setCoords(0,0,10,10)
-    center = Point(5,5)
+def getInput(point, win):
+    pX = point.getX()
+    pY = point.getY()
+    input_box = Entry(point, 5)
+    input_text = Text(Point(pX, pY+.5), 'Enter number of darts to be thrown')
+    input_box.draw(win)
+    input_text.draw(win)
+    key = win.getKey()
+    while key != 'Return':
+        key = win.getKey()
+    return int(input_box.getText())
+    input_box.undraw()
 
-    white = Circle(Point(5,5), 4)
-    white.setFill('white')
-    white.draw(win)
-
-    black = Circle(center, 3)
-    black.setFill('black')
-    black.draw(win)
-
-    blue = Circle(center, 2)
-    blue.setFill('blue')
-    blue.draw(win)
-
+def drawCircle(win):
+    center = Point(0, 0)
     red = Circle(center, 1)
     red.setFill('red')
     red.draw(win)
 
-    score = 0
+def simulateNDartsThrown(n, win):
+    h = 0
+    for i in range(n):
+        dart = Point(2*r.random()-1, 2*r.random()-1)
+        dart.draw(win)
+        if dart.getX()**2 + dart.getY()**2 <= 1:
+            h += 1
+    return h
 
-    score_text = Text(Point(5, 9.5), 'Your current score: {0}'.format(score))
-    score_text.draw(win)
-    for i in range(5):
-        arrow = win.getMouse()
-        arrowX = arrow.getX()
-        arrowY = arrow.getY()
-        if arrowX <= 6 and arrowX >= 4 and arrowY <= 6 and arrowY >= 4:
-            score += 9
-        elif arrowX <= 7 and arrowX >= 3 and arrowY <= 7 and arrowY >= 3:
-            score += 7
-        elif arrowX <= 8 and arrowX >= 2 and arrowY <= 8 and arrowY >= 2:
-            score += 5
-        elif arrowX <= 9 and arrowX >= 1 and arrowY <= 9 and arrowY >= 1:
-            score += 1  
-        else: pass
-        score_text.setText('Your current score: {0}'.format(score))
+def drawOutput(win, darts_thrown_in_circle, n):
+    output_text = Text(Point(0, -.5), 'Estimated pi is: {0:0.3f}'.format(4*darts_thrown_in_circle/n))
+    output_text.setTextColor('blue')
+    output_text.draw(win)
+
+
+def main():
+    win = drawWindow()
+    n = getInput(Point(0,0),win )
+    drawCircle(win)
+    darts_thrown_in_circle = simulateNDartsThrown(n, win)
+    drawOutput(win, darts_thrown_in_circle, n)
+    win.getMouse()
     win.close
+
 main()
