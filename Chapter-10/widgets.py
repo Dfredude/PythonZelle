@@ -42,6 +42,44 @@ class Button:
         self.rect.setWidth(1)
         self.active = False
 
+class CButton():
+    def __init__(self, win, center, radius, label) -> None:
+        '''Creates a circular button'''
+        w = h = self.radius = radius
+        self.centX, self.centY = center.getX(), center.getY()
+        self.circ = Circle(center, radius)
+        self.circ.setFill('lightgray')
+        self.circ.draw(win)
+        self.label = Text(center, label)
+        self.label.draw(win)
+        self.deactivate()
+
+    def clicked(self, p):
+        return (self.active and (self.centX - p.getX()) ** 2 +
+                (self.centY - p.getY()) ** 2
+                <= self.radius ** 2)
+    
+    def getLabel(self):
+        "Returns the label string of this button"
+        return self.label.getText()
+
+    def getStatus(self):
+        'Returns wether button is active'
+        return self.active
+
+    def activate(self):
+        'Sets this button to "active".'
+        self.label.setFill('black')
+        self.circ.setWidth(2)
+        self.active = True
+
+    def deactivate(self):
+        'Sets this button to "inactive".'
+        self.label.setFill('darkgrey')
+        self.circ.setWidth(1)
+        self.active = False
+        
+
 class Door:
     def __init__(self, point, win, width, height, door_num) -> None:
         #Set variables values
@@ -81,3 +119,4 @@ class Door:
     def undraw(self):
         self.rec.undraw()
         self.knob.undraw()
+
