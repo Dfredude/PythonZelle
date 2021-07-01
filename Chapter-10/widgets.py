@@ -18,7 +18,7 @@ class Button:
         self.deactivate()
 
     def clicked(self, p):
-        '''Returns the label string of this button.'''
+        '''Returns bool'''
         return (self.active and self.xmin <= p.getX() <= self.xmax and
         self.ymin <= p.getY() <= self.ymax)
     
