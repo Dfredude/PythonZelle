@@ -1,9 +1,10 @@
-from tkinter.constants import FALSE, TRUE
+from tkinter.constants import FALSE, NORMAL, TRUE
 from graphics import *
 from widgets import Button
 
 class Face:
     def __init__(self, window, center, size) -> None:
+        self.smile_status, self.frown_status = False, False
         self.win = window
         self.center = center
         self.size = size
@@ -40,6 +41,7 @@ class Face:
         self.ontop.setFill('white')
         self.ontop.setOutline('white')
         self.ontop.draw(self.win)
+        self.smile_status = True
     
     def frown(self):
         lp1 = self.leftEye.getCenter().clone()
@@ -54,6 +56,25 @@ class Face:
         self.leyebrow.draw(self.win)
         self.reyebrow = Line(rp1, rp2)
         self.reyebrow.draw(self.win)
+        self.frown_status = True
+
+    def reset(self):
+        if self.frown_status == True:
+            self.leyebrow.undraw()
+            self.reyebrow.undraw()
+            self.frown_status = False
+        if self.smile_status == True:
+            self.smiley.undraw()
+            self.ontop.undraw()
+            self.mouth.draw(self.win)
+            self.smile_status = False
+        else: pass
+    
+    def getX(self): return self.head.getCenter().getX()
+
+    def getY(self): return self.head.getCenter().getX()
+
+    
 
 def main():
     win = GraphWin('Face', 720, 720)
@@ -63,16 +84,25 @@ def main():
     smileb.activate()
     frownb = Button(win, Point(30, 15), 10, 10, 'Frown')
     frownb.activate()
+    normalb = Button(win, Point(40, 15), 10, 10, 'Normal')
+    normalb.activate()
     quitb = Button(win, Point(80, 15), 10, 10, 'Quit')
     quitb.activate()
     quit = False
     while quit == False:
         click = win.getMouse()
-        if smileb.clicked(click): myFace.smile()
-        elif frownb.clicked(click): myFace.frown()
+        if smileb.clicked(click):
+            myFace.reset()
+            myFace.smile()
+        elif frownb.clicked(click): 
+            myFace.reset()
+            myFace.frown()
+        elif normalb.clicked(click):
+            myFace.reset()
         elif quitb.clicked(click):
             win.close()
             quit = True
+        
     
 main()
     
