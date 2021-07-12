@@ -1,4 +1,5 @@
 
+from random import randrange
 from graphics import *
 from widgets import Button
 from Projectile import *
@@ -72,6 +73,20 @@ class InputDialog:
         'close the input window'
         self.win.close()
 
+class Target:
+    def __init__(self, p, radius) -> None:
+        self.body = Circle(p, radius)
+        self.body.setFill('red')
+        self.line1 = Circle(p, radius*.75)
+        self.line1.setFill('white')
+        self.line2 = Circle(p, radius/3)
+        self.line2.setFill('red')
+
+    def draw(self, win):
+        self.body.draw(win)
+        self.line1.draw(win)
+        self.line2.draw(win)
+
 def main():
     win = GraphWin("Projectile A", 640, 480, autoflush = False)
     win.setCoords(-10, -10, 210, 155)
@@ -80,10 +95,12 @@ def main():
         Text(Point(x, -5), str(x)).draw(win)
         Line(Point(x, 0), Point(x, 2)).draw(win)
     angle, vel, height = 45, 42, 2
+    randx = randrange(50, 200)
+    randy = randrange(5, 150)
+    Target(Point(randx, randy), 10).draw(win)
+    inputwin = InputDialog(angle, vel, height)
     while True:
-        inputwin = InputDialog(angle, vel, height)
         choice = inputwin.interact()
-        inputwin.close()
 
         if choice == 'Quit': break
 

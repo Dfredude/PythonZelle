@@ -1,2 +1,4 @@
+fred	50	30
 alf	50	200
 kevin	80	590
+mybro	100	120
