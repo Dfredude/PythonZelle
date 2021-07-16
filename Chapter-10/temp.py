@@ -1,7 +1,7 @@
 def mean(*args):
     for i in args: print(i**2)
 
+myList = [0,2,3,4]
 
-for i in range(4, 0):
-        print(i)
+print(range(len(myList)))
 

@@ -24,16 +24,19 @@ def reverse(myList):
     return list_length
 
 def sort(myList):
-    newList = []
-    for num in myList:
-        for i in range(len(newList)):
-            if num >= newList[i]:
-                newList[i+1] = num
-        else: newList[:] = num
+    sorted = False      
+    while not sorted:
+        sorted = True
+        for i in range(1, len(myList)):
+            if myList[i-1] > myList[i]:
+                myList[i-1], myList[i] = myList[i], myList[i-1]
+                sorted = False
 
 def main():
     myList = [5,8,8,3,1]
     print(count(myList, 8), isin(myList, 1), index(myList,8), reverse(myList))
+    sort(myList)
+    print(myList)
 
 main()
 
