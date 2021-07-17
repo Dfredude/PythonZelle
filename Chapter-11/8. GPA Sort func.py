@@ -1,5 +1,5 @@
 from graphics import GraphWin, Point, Text
-from gpa import Student, readStudents, writeStudents
+from gpa import Student, readStudents, writeStudents, makeStudent
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from widgets import Button
 
@@ -11,6 +11,15 @@ def createWindow():
 def deactivateAll(*args):
     for arg in args:
         arg.deactivate()
+
+def sort(Students):
+    sortedData = []     
+    for i in range(len(Students)):
+        x = (Students[i].gpa(), Students[i].getName(), 
+        Students[i].getHours(), Students[i].getQPoints())
+        sortedData.append(x)
+        sortedData.sort(reverse= True)
+    return sortedData
 
 def main():
     win = createWindow()
@@ -42,7 +51,12 @@ def main():
                 reverseButton.activate()
         elif sortButton.clicked(click):
             data = readStudents(filename)
-            if sorting_buttons[0].active: data.sort(key = Student.getName, reverse = reverseButton.active)
+            if sorting_buttons[0].active: 
+                sorted_students = sort(data)
+                data = []
+                for student in sorted_students:
+                    data.append(makeStudent(str(student[1])+'\t'+str(student[2])+'\t'+str(student[3])))
+
             elif sorting_buttons[1].active: data.sort(key = Student.getName, reverse = reverseButton.active)
             elif sorting_buttons[2].active: data.sort(key = Student.getQPoints, reverse = reverseButton.active)
             output_filename = asksaveasfilename()
@@ -56,5 +70,7 @@ def main():
     
     
     
+
+if __name__ == '__main__': main()
 
 if __name__ == '__main__': main()
