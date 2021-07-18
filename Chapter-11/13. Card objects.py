@@ -1,4 +1,4 @@
-from random import randrange
+from os import read, sep
 from tkinter.constants import S
 
 class Card:
@@ -33,18 +33,36 @@ class Card:
         else:
             return s_list[self.rank-1]
     
-    def getRank(self):
-        return self.rank
+    def getRank(self): return self.rank
+
+    def getSuit(self): return self.suit
+
+def readCards(filename:str) -> list:
+    infile = open(filename, 'r')
+    cards = []
+    for line in infile:
+        card_data = line.split(' ')
+        print(card_data)
+        if len(card_data) > 1:
+            cards.append(Card(card_data[0], card_data[1]))
+    infile.close()
+    return cards
+
+def writeCards(filename:str, cards:list) -> None:
+    outfile = open(filename, 'w')
+    for card in cards:
+        print(str(card.getRank()) + ' ' + str(card.getSuit()), file = outfile)
 
 def main():
-    suits = ['d','c','h','s']
-    n = int(input('Enter the number of iterations: '))
-    blackjack_value = 0
-    for i in range(n):
-        card = Card(randrange(0, 13), suits[randrange(0, 4)])
-        if card.getRank() <= 10: blackjack_value += 10
-        else: blackjack_value += card.getRank()
+    cards = readCards('cards.txt')
+    cards.sort(key = Card.getRank, reverse= True)
+    for i in cards:
+        print(i.getRank(), i.getSuit())
+    cards.sort(key = Card.getSuit)
+    print()
+    for i in cards:
+        print(i.getRank(), i.getSuit())
+    writeCards('newCards.txt', cards)
 
-    print('The black jack value is', blackjack_value)
 
-if __name__ == '__main__': main()
+main()
