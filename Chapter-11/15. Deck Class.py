@@ -1,5 +1,24 @@
 from random import randrange
+def shuffle(myList:list):
+    taken, newList = myList[:], myList[:]
+    length = len(myList)
+    for i in range(length):
+        taken[i] = ''
+    iterations = 0
+    for i in range(length):
+        correct = False
+        while not correct:
+            rnum = randrange(0, length)
+            if rnum not in taken:
+                newList[rnum] = myList[i]
+                taken[i] = rnum
+                iterations += 1
+                correct = True
+    myList[:] = newList[:]
 
+def createDeckOfOneSuit(suit:str):
+    return [Card(i,suit) for i in range(1, 13)]
+        
 class Card:
     def __init__(self, rank, suit) -> None:
         self.rank = rank
@@ -35,15 +54,27 @@ class Card:
     def getRank(self):
         return self.rank
 
-def main():
-    suits = ['d','c','h','s']
-    n = int(input('Enter the number of iterations: '))
-    blackjack_value = 0
-    for i in range(n):
-        card = Card(randrange(0, 13), suits[randrange(0, 4)])
-        if card.getRank() <= 10: blackjack_value += 10
-        else: blackjack_value += card.getRank()
+class Deck:
+    def __init__(self) -> None:
+        self.cards = createDeckOfOneSuit('c') + createDeckOfOneSuit('d') + createDeckOfOneSuit('h') + createDeckOfOneSuit('s')
 
-    print('The black jack value is', blackjack_value)
+    def shuffle(self): shuffle(self.cards)
+
+    def dealCard(self): return self.cards.pop()
+
+    def cardsLeft(self): return len(self.cards)
+
+def main():
+    myDeck = Deck()
+    for card in myDeck.cards: print(card.getRank(), card.suit)
+    myDeck.shuffle()
+    for card in myDeck.cards: print(card.getRank(), card.suit)
+
+def test():
+    pass
+    
 
 if __name__ == '__main__': main()
+
+
+        
