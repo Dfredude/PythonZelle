@@ -8,6 +8,7 @@ class ShotTracker:
         self.marker = Circle(Point(0, height), 3)
         self.marker.setFill("red")
         self.marker.draw(win)
+        self.radius = self.marker.getRadius()
 
     def update(self, dt):
         'Move the shot dt seconds farther along its flight'
@@ -26,6 +27,8 @@ class ShotTracker:
     
     def getY(self):
         return self.proj.getY()
+
+    def getRadius(self): return self.radius
 
     def undraw(self):
         self.marker.undraw()
@@ -166,7 +169,13 @@ class ProjectileApp:
                 if len(self.shots) > 0:
                     self.number_of_shot += 1
             for shot in self.shots:
-                if self.target.isTouched(shot.getCenter()):
+                cordX, cordY, radius = shot.getX(), shot.getY(), shot.getRadius()
+                if self.target.isTouched(Point(cordX+radius, 
+                cordY+radius)) or self.target.isTouched(Point(cordX-radius, 
+                cordY-radius)) or self.target.isTouched(Point(cordX, 
+                cordY + radius)) or self.target.isTouched(Point(cordX, 
+                cordY-radius)) or self.target.isTouched(Point(cordX + radius, 
+                cordY)) or self.target.isTouched(Point(cordX - radius, cordY)):
                     self.target.deactivate()
                     self.target = self.launcher.generateRandomTarget()
                     self.target.draw(self.win)

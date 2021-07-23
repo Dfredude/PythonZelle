@@ -41,6 +41,10 @@ class Button:
         self.label.setFill('darkgrey')
         self.rect.setWidth(1)
         self.active = False
+    
+    def undraw(self):
+        self.label.undraw()
+        self.rect.undraw()
 
 class CButton():
     def __init__(self, win, center, radius, label) -> None:
