@@ -1,0 +1,25 @@
+{
+    "users": [
+        {
+            "name":"Fred", 
+            "ID":"freddy02",
+            "PIN":"0000",
+            "checking":100,
+            "savings":3600
+        },
+        {
+            "name":"Lucky", 
+            "ID":"lol321",
+            "PIN":"2890",
+            "checking":500,
+            "savings":20000
+        },
+        {
+            "name":"Veronica", 
+            "ID":"verogg36",
+            "PIN":"0498",
+            "checking":30,
+            "savings":1000
+        }
+    ]
+}

@@ -1,8 +1,30 @@
 {
-        "rorrun@gmail.com": { "name": "Chris", "company": "TMG", "state": "PA, USA"},
-        "mjt@gmail.com": {"name": "Matt", "company": "M&A", "state": "NJ, USA"}, 
-        "mccuskermusic@gmail": {"name": "Sean", "company": "PSD", "state": "PA, USA"}, 
-        "chrmgianc@gmail.com": {"name": "Christina", "company": "G&P", "state": "PA, USA"}, 
-        "brian@noidea.io": {"name": "Brian", "company": "Jordan Business Loans", "state": "Gaza Strip, Jordan"}
+        "attendees": 
+        [
+                {       
+                        "name": "Chris",        
+                        "company": "TMG",
+                        "state": "PA, USA",
+                        "email": "rorrun@gmail.com"},
+                {
+                        "name": "Matt", 
+                        "company": "M&A", 
+                        "state": "NJ, USA",
+                        "email": "mjt@gmail.com"}, 
+                {
+                        "name": "Sean", 
+                        "company": "PSD", 
+                        "state": "PA, USA", 
+                        "email": "mccuskermusic@gmail"}, 
+                {
+                        "name": "Christina", 
+                        "company": "G&P", 
+                        "state": "PA, USA", 
+                        "email": "chrmgianc@gmail.com"}, 
+                {
+                        "name": "Brian", 
+                        "company": "Jordan Business Loans", 
+                        "state": "Gaza Strip, Jordan", 
+                        "email": "brian@noidea.io"}]
         
 }
