@@ -3,7 +3,7 @@ from graphics import *
 from graphics import Point
 
 if __name__ == '__main__':
-    variable = True
+    variable = False
     other = 0
     while variable:
         other += 1
