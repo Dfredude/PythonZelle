@@ -1,16 +1,21 @@
-from graphics import *
+class chef:
+    def __init__(self, specialDish:str) -> None:
+        self.specialDish = specialDish
+        self.salad = 'Cesar Salad'
 
-from graphics import Point
+    def makeSpecialDIsh(self): print('Here is your ', self.specialDish)
 
-if __name__ == '__main__':
-    variable = False
-    other = 0
-    while variable:
-        other += 1
-        print('i')
-        if other > 4:
-            variable = Point(3, 5)
-    print(variable)
+    def makeSalad(self): print('Here is your {0}'.format(self.salad))
 
+class mexicanChef(chef):
+    def __init__(self) -> None:
+        super().__init__('Taco')
         
 
+myChef = chef('Biscuit')
+myMChef = mexicanChef()
+
+myChef.makeSpecialDIsh()
+myMChef.makeSpecialDIsh()
+myChef.makeSalad()
+myMChef.makeSalad()
