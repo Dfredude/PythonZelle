@@ -4,7 +4,7 @@ from graphics import *
 import math as m
 
 def graphWin(Title):
-#Create a graphics window with <done> button in bottom left corner
+    #Create a graphics window with <done> button in bottom left corner
     win = GraphWin(Title, 720, 720)
     win.setCoords(-10, -10, 10, 10)
     #Tell user to select multiple locations on the screen to designate points
@@ -70,4 +70,5 @@ def main():
     regressLine = Line(Point(x1, (a + b * x1)), Point(x2, (a + b * x2)))
     regressLine.draw(win)
     win.getMouse()
+
 main()
