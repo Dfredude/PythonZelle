@@ -54,8 +54,10 @@ class Regression:
     def addPoint(self, point):
         self.points.append(point)
 
-    def predict(self):
-        pass
+    def predict(self, x_value):
+        self.calculateRegressionNDraw()
+        y = self.b * x_value + self.a
+        return y
 
     def calculateRegressionNDraw(self):
         self.__average__()

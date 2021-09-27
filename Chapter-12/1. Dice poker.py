@@ -112,6 +112,9 @@ class GraphicsInterface:
         self.money = Text(Point(300, 325), '$100')
         self.money.setSize(18)
         self.money.draw(self.win)
+        self.helpButton = Button(self.win, Point(525, 75), 50, 30, "Help")
+        self.helpButton.activate()
+        
 
     def createDice(self, center, size):
         center.move(-3*size, 0)
@@ -213,12 +216,24 @@ class Intro:
         self.LetsPlayB.activate()
         self.quitB = Button(self.win, Point(500, 350), 50, 30, "Quit")
         self.quitB.activate()
+        self.helpButton = Button(self.win, Point(525, 25), 50, 30, "Help")
+        self.helpButton.activate()
 
     def run(self):
         while True:
             click = self.win.getMouse()
             if self.LetsPlayB.clicked(click): break
             elif self.quitB.clicked(click): return 'Quit'
+            elif self.helpButton.clicked(click):
+                self.helpText = Text(Point(300, 75), """This is a dice poker game
+How to play (After you click on Let's play):
+1. Click on \"Roll\" to roll the dices
+2. Afterwards you may reroll any dice that you may want
+    to change in the set, up to 2 times
+3. Click on Score to complete the round and see what your result is
+4. Depending on the kind of combination of dices you get,
+    your score will be determined""")
+                self.helpText.draw(self.win)
         self.removeIntro()
 
     def removeIntro(self):
