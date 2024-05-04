@@ -3,7 +3,7 @@
 2. The CPU is the "brain" of the computer. **True**
 3. Secondary memory is also called RAM. **False**
 4. All information that a computer is currently working on is stored in main memory. **True**
-5. The syntax of a language is its meaning, and semantics is its form.**True**
+5. The syntax of a language is its meaning, and semantics is its form.**False**
 6. A function definition is a sequence of statements that defines a new command. **True**
 7. A programming environment refers to a place where programmers work. **False**
 8. A variable is used to give a name to a value so it can be referred to in other places. **True**
